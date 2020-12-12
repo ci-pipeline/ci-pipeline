@@ -5,15 +5,19 @@ def call(ObjectModel model) {
         model.steps.each { step ->
 
             if (step.isParallelStep()) {
-                parallel {
-                    step.parallel.each { pStep ->
-                        stage(pStep.name) {
-                            pStep.actions.each { action ->
-                                sh action
-                            }
+
+                def stages = [:]
+
+                step.parallel.each { pStep ->
+                    stages[pStep.name] = {
+                        pStep.actions.each { action ->
+                            sh action
                         }
                     }
                 }
+
+                parallel(stages)
+
             } else {
                 stage(step.name) {
                     step.actions.each { action ->
