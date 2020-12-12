@@ -42,3 +42,6 @@ steps:
     actions:
       - echo "do deploy"
 ```
+
+
+<img src="https://github.com/ci-pipeline/ci-pipeline/raw/master/etc/pipeline.png"  width="400px"/>
