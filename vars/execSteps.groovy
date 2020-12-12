@@ -1,5 +1,7 @@
 def call(ObjectModel model) {
 
+    println(env.BRANCH_NAME)
+
     docker.image(model.image).inside {
 
         model.steps.each { step ->

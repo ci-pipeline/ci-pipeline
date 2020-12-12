@@ -1,0 +1,3 @@
+* execute step conditionally (based on branch or tag names)
+* add manual steps
+* run service (db, cache, etc..) inside individual steps
