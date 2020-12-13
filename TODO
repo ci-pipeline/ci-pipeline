@@ -6,5 +6,4 @@
 	* allow define services as top level elements
 	* but use it inside each step by specifying service name
 * add timeout step <DONE>
-* save artifact
-* define variables		 (P=3)
+* define variables		 (P=3) <DONE>
