@@ -1,5 +1,6 @@
 * basic setup <DONE>
 * execute step conditionally (based on branch or tag names)		<DONE>
-* add manual steps
+* add manual triggered steps
 * run service (db, cache, etc..) inside individual steps
-* add timeout step
+* add timeout step <DONE>
+* save artifact
