@@ -27,11 +27,6 @@ def call(ObjectModel model) {
 }
 
 private def buildStep(Step step) {
-
-    if (step.waitOnInput()) {
-        input
-    }
-
     if (step.except.size() > 0 && globContains(step.except, env.BRANCH_NAME)) {
         Utils.markStageSkippedForConditional(env.STAGE_NAME)
         return
@@ -40,6 +35,10 @@ private def buildStep(Step step) {
     if (step.only.size() > 0 && !globContains(step.only, env.BRANCH_NAME)) {
         Utils.markStageSkippedForConditional(env.STAGE_NAME)
         return
+    }
+
+    if (step.waitOnInput()) {
+        input
     }
 
     step.actions.each { action ->
