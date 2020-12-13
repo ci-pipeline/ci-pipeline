@@ -1,3 +1,7 @@
+import org.jenkinsci.plugins.pipeline.modeldefinition.Utils
+
+import static ObjectModel.Step
+
 def call(ObjectModel model) {
 
     docker.image(model.image).inside {
@@ -7,11 +11,9 @@ def call(ObjectModel model) {
             if (step.isParallelStep()) {
 
                 def stages = [:]
-
                 step.parallel.each { pStep ->
                     stages[pStep.name] = { buildStep(pStep) }
                 }
-
                 parallel(stages)
 
             } else {
@@ -23,15 +25,23 @@ def call(ObjectModel model) {
     }
 }
 
-private def buildStep(def step) {
-    step.only.each {
-        when { branch it }
+private def buildStep(Step step) {
+
+    if (step.except.size() > 0 && globContains(step.except, env.BRANCH_NAME)) {
+        Utils.markStageSkippedForConditional(env.STAGE_NAME)
+        return
     }
-    step.except.each {
-        when { not { branch it } }
+
+    if (step.only.size() > 0 && !globContains(step.only, env.BRANCH_NAME)) {
+        Utils.markStageSkippedForConditional(env.STAGE_NAME)
+        return
     }
 
     step.actions.each { action ->
         sh action
     }
+}
+
+private static boolean globContains(List<String> list, String e) {
+    return list.find { Comparator.GLOB.compare(it, e) } != null
 }
