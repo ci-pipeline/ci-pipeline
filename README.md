@@ -1,8 +1,13 @@
+## ci-pipeline
+Run your jenkins pipeline with openiated `.ci-pipeline.yaml` (instead of the generic `Jenkinsfile`).
 
 ## Setup:
 
 1. Download the plugin [pipeline-multibranch-defaults-plugin](https://github.com/jenkinsci/pipeline-multibranch-defaults-plugin/blob/master/README.md)
-2. Follow [steps](https://github.com/jenkinsci/pipeline-multibranch-defaults-plugin/blob/master/README.md#create-a-default-jenkinsfile) to create default Jenkinsfile, providing the following script:
+
+<img src="https://github.com/ci-pipeline/ci-pipeline/raw/master/etc/pipeline-multibranch-defaults-plugin.png"  width="1000px"/>
+
+2. Follow [steps](https://github.com/jenkinsci/pipeline-multibranch-defaults-plugin/blob/master/README.md#create-a-default-jenkinsfile) to create default Jenkinsfile (under `Manage Jenkins` > `Managed files`), providing the following script:
 ```
 library identifier: 'ci-pipeline@master',
         retriever: modernSCM([$class: 'GitSCMSource', remote: 'https://github.com/ci-pipeline/ci-pipeline.git'])
@@ -13,7 +18,6 @@ node {
 }
 ```
 3. [Create a multibranch pipeline](https://github.com/jenkinsci/pipeline-multibranch-defaults-plugin/blob/master/README.md#create-a-multibranch-pipeline-job) with Jenkisfile points to the default Jenkinsfile created from the previous step, and configure the Branch Sources to point to your project repository.
-<img src="https://github.com/ci-pipeline/ci-pipeline/raw/master/etc/pipeline-multibranch-defaults-plugin.png"  width="400px"/>
 
 4. Your project should have the file `.ci-pipeline.yaml` [see example here](https://github.com/ci-pipeline/example_multibranch):
 
