@@ -1,3 +1,5 @@
-* execute step conditionally (based on branch or tag names)
+* basic setup <DONE>
+* execute step conditionally (based on branch or tag names)		<DONE>
 * add manual steps
 * run service (db, cache, etc..) inside individual steps
+* add timeout step

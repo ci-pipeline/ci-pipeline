@@ -33,11 +33,12 @@ steps:
       - echo "building step 2"
   - parallel:
       - name: unit test
+        except:
+          - master
         actions:
           - echo "unit testing"
       - name: integration test
-        only:
-          - develop
+        only: [develop, release/*]
         actions:
           - echo "integration testing step 1"
           - echo "integration testing step 2"
