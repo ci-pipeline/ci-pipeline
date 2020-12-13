@@ -54,10 +54,10 @@ class ObjectModel {
         yaml.actions.each { actions.add(it) }
 
         List<String> only = new ArrayList<>()
-        yaml.only { only.add(it) }
+        yaml.only.each { only.add(it) }
 
         List<String> except = new ArrayList<>()
-        yaml.only { except.add(it) }
+        yaml.only.each { except.add(it) }
 
         return new Step(
                 name: yaml.name,
