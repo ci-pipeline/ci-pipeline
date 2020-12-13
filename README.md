@@ -36,12 +36,14 @@ steps:
         actions:
           - echo "unit testing"
       - name: integration test
-        when: branch == develop
+        only:
+          - develop
         actions:
           - echo "integration testing step 1"
           - echo "integration testing step 2"
   - name: deploy
-  	when: branch == release/*
+    only:
+      - release/*
     actions:
       - echo "do deploy"
 ```
