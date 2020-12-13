@@ -38,7 +38,7 @@ private def buildStep(Step step) {
     }
 
     if (step.waitOnInput()) {
-        input
+        input()
     }
 
     step.actions.each { action ->
