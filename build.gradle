@@ -1,0 +1,33 @@
+apply plugin: 'groovy'
+
+// follow the structure as dictated by Jenkins:
+sourceSets {
+    main {
+        groovy {
+            srcDirs = ['src','vars']
+        }
+        resources {
+            srcDirs = ['resources']
+        }
+    }
+}
+
+repositories {
+    jcenter()
+    maven {
+        url "https://repo.jenkins-ci.org/releases/"
+    }
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.5.6'
+    compile 'org.apache.ivy:ivy:2.4.0'
+    compile 'org.jenkins-ci.main:jenkins-core:2.164.1'
+    def staplerGAV = 'org.kohsuke.stapler:stapler:1.255'
+    compile staplerGAV
+    annotationProcessor staplerGAV
+    compile 'org.jenkins-ci.plugins.workflow:workflow-step-api:2.19@jar'
+    compile 'org.jenkins-ci.plugins:pipeline-utility-steps:2.2.0@jar'
+    compile 'org.jenkinsci.plugins:pipeline-model-definition:1.7.2@jar'
+
+}
