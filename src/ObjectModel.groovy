@@ -57,7 +57,7 @@ class ObjectModel {
         yaml.only.each { only.add(it) }
 
         List<String> except = new ArrayList<>()
-        yaml.only.each { except.add(it) }
+        yaml.except.each { except.add(it) }
 
         return new Step(
                 name: yaml.name,
