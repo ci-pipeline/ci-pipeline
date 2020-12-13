@@ -5,8 +5,6 @@ Run your jenkins pipeline with openiated `.ci-pipeline.yaml` (instead of the gen
 
 1. Download the plugin [pipeline-multibranch-defaults-plugin](https://github.com/jenkinsci/pipeline-multibranch-defaults-plugin/blob/master/README.md)
 
-<img src="https://github.com/ci-pipeline/ci-pipeline/raw/master/etc/pipeline-multibranch-defaults-plugin.png"  width="1000px"/>
-
 2. Follow [steps](https://github.com/jenkinsci/pipeline-multibranch-defaults-plugin/blob/master/README.md#create-a-default-jenkinsfile) to create default Jenkinsfile (under `Manage Jenkins` > `Managed files`), providing the following script:
 ```
 library identifier: 'ci-pipeline@master',
@@ -17,11 +15,33 @@ node {
   ci('.ci-pipeline.yaml')
 }
 ```
-3. [Create a multibranch pipeline](https://github.com/jenkinsci/pipeline-multibranch-defaults-plugin/blob/master/README.md#create-a-multibranch-pipeline-job) with Jenkisfile points to the default Jenkinsfile created from the previous step, and configure the Branch Sources to point to your project repository.
+
+3a. [Create a multibranch pipeline](https://github.com/jenkinsci/pipeline-multibranch-defaults-plugin/blob/master/README.md#create-a-multibranch-pipeline-job) with Jenkisfile points to the default Jenkinsfile created from the previous step, and configure the Branch Sources to point to your project repository.
+
+3b. Or you can use [Job DSL to create](https://github.com/jenkinsci/pipeline-multibranch-defaults-plugin/blob/master/README.md#example-job-dsl-configuration) multibranch pipelines.
+
+```
+multibranchPipelineJob('example') {
+    // SCM source or additional configuration
+
+    factory {
+        pipelineBranchDefaultsProjectFactory {
+            // The ID of the default Jenkinsfile to use from the global Config
+            // File Management.
+            scriptId 'Jenkinsfile'
+
+            // If enabled, the configured default Jenkinsfile will be run within
+            // a Groovy sandbox.
+            useSandbox true
+        }
+    }
+}
+
+```
 
 4. Your project should have the file `.ci-pipeline.yaml` [see example here](https://github.com/ci-pipeline/example_multibranch):
 
-sample `.ci-pipeline.yaml`
+## `.ci-pipeline.yaml`:
 
 ```yaml
 image: golang:alpine
@@ -48,7 +68,6 @@ steps:
     actions:
       - echo "do deploy"
 ```
-
 
 <img src="https://github.com/ci-pipeline/ci-pipeline/raw/master/etc/pipeline.png"  width="400px"/>
 <img src="https://github.com/ci-pipeline/ci-pipeline/raw/master/etc/pipeline-2.png"  width="400px"/>
