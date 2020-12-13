@@ -1,3 +1,5 @@
+## ci-pipeline
+Run your jenkins pipeline with openiated `.ci-pipeline.yaml` (instead of the generic `Jenkinsfile`).
 
 ## Setup:
 
