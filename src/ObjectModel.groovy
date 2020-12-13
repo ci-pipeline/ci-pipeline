@@ -15,9 +15,15 @@ class ObjectModel {
         public List<String> actions
         // parallel steps
         public List<Step> parallel = new ArrayList<>()
+        // trigger: manual|automatic, default=automatic
+        public String trigger
 
         boolean isParallelStep() {
             return parallel.size() > 0
+        }
+
+        boolean waitOnInput() {
+            return "manual".equalsIgnoreCase(trigger)
         }
     }
 
@@ -63,7 +69,8 @@ class ObjectModel {
                 name: yaml.name,
                 only: only,
                 except: except,
-                actions: actions
+                actions: actions,
+                trigger: yaml.trigger
         )
     }
 }

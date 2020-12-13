@@ -63,6 +63,7 @@ steps:
           - echo "integration testing step 1"
           - echo "integration testing step 2"
   - name: deploy
+  	trigger: manual
     only:
       - release/*
     actions:
