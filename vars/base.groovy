@@ -1,7 +1,7 @@
-def call(ObjectModel model, def nextClosure) {
-    timeout(time: 600, unit: 'SECONDS') {
+def call(ObjectModel model) {
+    timeout(time: 10, unit: 'MINUTES') {
         wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
-            nextClosure()(model)
+            execSteps(model)
         }
     }
 }

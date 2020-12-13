@@ -1,6 +1,10 @@
 * basic setup <DONE>
+* allow specify image in each step that override the global image (P=5)
 * execute step conditionally (based on branch or tag names)		<DONE>
-* add manual triggered steps
-* run service (db, cache, etc..) inside individual steps
+* add manual triggered steps	 <DONE>
+* run service (db, cache, etc..) inside individual steps	 (P=3)
+	* allow define services as top level elements
+	* but use it inside each step by specifying service name
 * add timeout step <DONE>
 * save artifact
+* define variables		 (P=3)
