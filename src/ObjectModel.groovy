@@ -3,6 +3,8 @@ class ObjectModel {
     // the container image the used to run the build
     public String image
     public List<Step> steps = new ArrayList<>()
+    // variables set as env vars
+    public List<String> variables = new ArrayList<>()
 
     static class Step {
         // step name
@@ -30,12 +32,14 @@ class ObjectModel {
     static ObjectModel load(def yaml) {
         ObjectModel model = new ObjectModel()
         model.image = yaml.image
+
         loadSteps(yaml, model)
+        loadVariables(yaml.variables, model)
 
         return model
     }
 
-    private static Object loadSteps(yaml, model) {
+    private static Object loadSteps(def yaml, ObjectModel model) {
         yaml.steps.each { YamlStep ->
 
             if (YamlStep.parallel != null) {
@@ -52,6 +56,12 @@ class ObjectModel {
             } else {
                 model.steps.add(newStep(YamlStep))
             }
+        }
+    }
+
+    private static def loadVariables(def yaml, ObjectModel model) {
+        yaml.each { k, v ->
+            model.variables.add("$k=$v")
         }
     }
 

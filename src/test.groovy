@@ -1,4 +1,4 @@
-import org.yaml.snakeyaml.Yaml
+import org.jenkinsci.plugins.pipeline.utility.steps.shaded.org.yaml.snakeyaml.Yaml
 
 
 def yaml = new Yaml()
@@ -26,6 +26,10 @@ steps:
   - release/*
   actions: 
   - echo "do deploy"
+  
+variables:
+  TEST_URL: http://example.com
+  FULL_TEST_URL: \$TEST_URL/rest-of-url
 """)
 
 ObjectModel model = ObjectModel.load(yamlObject)
@@ -33,4 +37,6 @@ ObjectModel model = ObjectModel.load(yamlObject)
 println(model.steps[0].isParallelStep())
 println(model.steps[1].isParallelStep())
 println(model.steps[2].isParallelStep())
+
+println(model.variables)
 

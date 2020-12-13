@@ -56,7 +56,7 @@ steps:
         except:
           - master
         actions:
-          - echo "unit testing"
+          - echo "unit testing againest test url: $TEST_URL"
       - name: integration test
         only: [develop, release/*]
         actions:
@@ -68,6 +68,10 @@ steps:
       - release/*
     actions:
       - echo "do deploy"
+
+variables:
+  TEST_URL: http://example.com
+
 ```
 
 <img src="https://github.com/ci-pipeline/ci-pipeline/raw/master/etc/pipeline.png"  width="400px"/>
