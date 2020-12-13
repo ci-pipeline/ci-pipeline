@@ -56,7 +56,7 @@ steps:
         except:
           - master
         actions:
-          - echo "unit testing againest test url: $TEST_URL"
+          - echo "unit testing againest test url= $TEST_URL"
       - name: integration test
         only: [develop, release/*]
         actions:
