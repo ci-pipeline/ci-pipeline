@@ -1,4 +1,5 @@
 import org.jenkinsci.plugins.pipeline.modeldefinition.Utils
+import org.jenkinsci.plugins.pipeline.modeldefinition.when.utils.Comparator
 
 import static ObjectModel.Step
 
