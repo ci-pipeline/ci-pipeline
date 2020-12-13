@@ -1,16 +1,23 @@
 class ObjectModel {
 
+    // the container image the used to run the build
     public String image
     public List<Step> steps = new ArrayList<>()
 
     static class Step {
+        // step name
         public String name
-        public String when
+        // branches or tags what only to run the step in
+        public List<String> only = new ArrayList<>()
+        // branches or tags that don't run the step in
+        public List<String> except = new ArrayList<>()
+        // actions to execute as part of the step
         public List<String> actions
-        public List<Step> parallel
+        // parallel steps
+        public List<Step> parallel = new ArrayList<>()
 
         boolean isParallelStep() {
-            return parallel != null && parallel.size() > 0
+            return parallel.size() > 0
         }
     }
 
@@ -43,13 +50,19 @@ class ObjectModel {
     }
 
     private static Step newStep(def yaml) {
-        List<String> actions = new ArrayList<>();
-        yaml.actions.each {
-            actions.add(it)
-        }
+        List<String> actions = new ArrayList<>()
+        yaml.actions.each { actions.add(it) }
+
+        List<String> only = new ArrayList<>()
+        yaml.only { only.add(it) }
+
+        List<String> except = new ArrayList<>()
+        yaml.only { except.add(it) }
+
         return new Step(
                 name: yaml.name,
-                when: yaml.when,
+                only: only,
+                except: except,
                 actions: actions
         )
     }

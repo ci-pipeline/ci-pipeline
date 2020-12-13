@@ -1,7 +1,5 @@
 def call(ObjectModel model) {
 
-    println(env.BRANCH_NAME)
-
     docker.image(model.image).inside {
 
         model.steps.each { step ->
@@ -11,22 +9,29 @@ def call(ObjectModel model) {
                 def stages = [:]
 
                 step.parallel.each { pStep ->
-                    stages[pStep.name] = {
-                        pStep.actions.each { action ->
-                            sh action
-                        }
-                    }
+                    stages[pStep.name] = { buildStep(pStep) }
                 }
 
                 parallel(stages)
 
             } else {
                 stage(step.name) {
-                    step.actions.each { action ->
-                        sh action
-                    }
+                    buildStep(step)
                 }
             }
         }
+    }
+}
+
+private def buildStep(def step) {
+    step.only.each {
+        when { branch it }
+    }
+    step.except.each {
+        when { not { branch it } }
+    }
+
+    step.actions.each { action ->
+        sh action
     }
 }
