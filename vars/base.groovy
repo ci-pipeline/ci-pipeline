@@ -3,8 +3,9 @@ def call(ObjectModel model) {
         withEnv(model.variables) {
             wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
 
+                def image2Container = [:]
                 try {
-                    def image2Container = execService(model)
+                    image2Container = execService(model)
                     execSteps(model, image2Container)
                 } finally {
                     image2Container.each { image, container ->
