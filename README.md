@@ -4,9 +4,10 @@ Run your jenkins pipeline with openiated `.ci-pipeline.yaml` (instead of the gen
 ## Setup:
 1. Run [a preconfigured jenkins instance](https://github.com/ci-pipeline/jenkins) using docker-compose.
 
-> Note: your project git url need to be added to [create-multibranch-pipeline.groovy](https://github.com/ci-pipeline/jenkins/blob/c7ad6ae23eb8a7d4691230fcff4883ed7cd57da3/job-dsl-scripts/create-multibranch-pipeline.groovy#L2).
+2. You will need to add a multibranch pipeline job for your project ([see example](https://github.com/jenkinsci/pipeline-multibranch-defaults-plugin/blob/master/README.md#create-a-multibranch-pipeline-job))
 
-2. Place the file `.ci-pipeline.yaml` in the root dir of your project [see example here](https://github.com/ci-pipeline/example_multibranch) see next section on an example of the file.
+
+3. Place the file `.ci-pipeline.yaml` in the root dir of your project [see example here](https://github.com/ci-pipeline/example_multibranch) see next section on an example of the file.
 
 ## `.ci-pipeline.yaml`:
 
