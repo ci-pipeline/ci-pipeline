@@ -7,7 +7,7 @@ def call(ObjectModel model, def image2Container) {
 
     def link = ""
     image2Container.each { image, container ->
-        link += " --link ${container.id}:${image}"
+        link += " --link ${container.id}:${image.split(":")[0]}"
     }
 
     docker.image(model.image).inside(link) {
