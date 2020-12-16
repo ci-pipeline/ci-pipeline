@@ -2,44 +2,12 @@
 Run your jenkins pipeline with openiated `.ci-pipeline.yaml` (instead of the generic `Jenkinsfile`).
 
 ## Setup:
+1. Run [a preconfigured jenkins instance](https://github.com/ci-pipeline/jenkins) using docker-compose.
 
-1. Download the plugin [pipeline-multibranch-defaults-plugin](https://github.com/jenkinsci/pipeline-multibranch-defaults-plugin/blob/master/README.md)
+2. You will need to add a multibranch pipeline job for your project ([see example](https://github.com/jenkinsci/pipeline-multibranch-defaults-plugin/blob/master/README.md#create-a-multibranch-pipeline-job))
 
-2. Follow [steps](https://github.com/jenkinsci/pipeline-multibranch-defaults-plugin/blob/master/README.md#create-a-default-jenkinsfile) to create default Jenkinsfile (under `Manage Jenkins` > `Managed files`), providing the following script:
-```
-library identifier: 'ci-pipeline@master',
-        retriever: modernSCM([$class: 'GitSCMSource', remote: 'https://github.com/ci-pipeline/ci-pipeline.git'])
 
-node {
-  checkout scm
-  ci('.ci-pipeline.yaml')
-}
-```
-
-3a. [Create a multibranch pipeline](https://github.com/jenkinsci/pipeline-multibranch-defaults-plugin/blob/master/README.md#create-a-multibranch-pipeline-job) with Jenkisfile points to the default Jenkinsfile created from the previous step, and configure the Branch Sources to point to your project repository.
-
-3b. Or you can use [Job DSL to create](https://github.com/jenkinsci/pipeline-multibranch-defaults-plugin/blob/master/README.md#example-job-dsl-configuration) multibranch pipelines.
-
-```
-multibranchPipelineJob('example') {
-    // SCM source or additional configuration
-
-    factory {
-        pipelineBranchDefaultsProjectFactory {
-            // The ID of the default Jenkinsfile to use from the global Config
-            // File Management.
-            scriptId 'Jenkinsfile'
-
-            // If enabled, the configured default Jenkinsfile will be run within
-            // a Groovy sandbox.
-            useSandbox true
-        }
-    }
-}
-
-```
-
-4. Your project should have the file `.ci-pipeline.yaml` [see example here](https://github.com/ci-pipeline/example_multibranch):
+3. Place the file `.ci-pipeline.yaml` in the root dir of your project [see example here](https://github.com/ci-pipeline/example_multibranch) see next section on an example of the file.
 
 ## `.ci-pipeline.yaml`:
 
