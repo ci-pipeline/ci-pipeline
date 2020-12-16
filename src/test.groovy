@@ -6,6 +6,14 @@ def yaml = new Yaml()
 def yamlObject = yaml.load("""
 image: golang
 
+variables:
+  TEST_URL: http://example.com
+  FULL_TEST_URL: \$TEST_URL/rest-of-url
+
+services:
+- mysql
+- postgres
+
 steps:
 - name: build
   actions: 
@@ -26,10 +34,6 @@ steps:
   - release/*
   actions: 
   - echo "do deploy"
-  
-variables:
-  TEST_URL: http://example.com
-  FULL_TEST_URL: \$TEST_URL/rest-of-url
 """)
 
 ObjectModel model = ObjectModel.load(yamlObject)
@@ -39,4 +43,5 @@ println(model.steps[1].isParallelStep())
 println(model.steps[2].isParallelStep())
 
 println(model.variables)
+println(model.services)
 

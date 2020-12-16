@@ -3,9 +3,14 @@ import org.jenkinsci.plugins.pipeline.modeldefinition.when.utils.Comparator
 
 import static ObjectModel.Step
 
-def call(ObjectModel model) {
+def call(ObjectModel model, def image2Container) {
 
-    docker.image(model.image).inside {
+    def link = ""
+    image2Container.each { image, container ->
+        link += " --link ${container.id}:${image}"
+    }
+
+    docker.image(model.image).inside(link) {
 
         model.steps.each { step ->
 

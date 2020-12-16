@@ -46,6 +46,13 @@ multibranchPipelineJob('example') {
 ```yaml
 image: golang:alpine
 
+variables:
+  TEST_URL: http://example.com
+
+services:
+  - postgres
+  - mysql
+
 steps:
   - name: build
     actions:
@@ -68,9 +75,6 @@ steps:
       - release/*
     actions:
       - echo "do deploy"
-
-variables:
-  TEST_URL: http://example.com
 
 ```
 

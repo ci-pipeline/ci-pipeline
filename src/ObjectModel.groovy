@@ -5,6 +5,8 @@ class ObjectModel {
     public List<Step> steps = new ArrayList<>()
     // variables set as env vars
     public List<String> variables = new ArrayList<>()
+    // image names to run as sidecar services
+    public Set<String> services = new HashSet<>()
 
     static class Step {
         // step name
@@ -35,6 +37,7 @@ class ObjectModel {
 
         loadSteps(yaml, model)
         loadVariables(yaml.variables, model)
+        loadServices(yaml.services, model)
 
         return model
     }
@@ -63,6 +66,10 @@ class ObjectModel {
         yaml.each { k, v ->
             model.variables.add("$k=$v")
         }
+    }
+
+    private static def loadServices(def yaml, ObjectModel model) {
+        yaml.each { model.services.add(it) }
     }
 
     private static Step newStep(def yaml) {
