@@ -1,26 +1,28 @@
 def call(ObjectModel model) {
-    return Network.create(model.services.size() > 0)
+
+    return Network.create(model.services.size() > 0, sh)
 }
 
 class Network {
     String id
     boolean hasServices
+    def shell
 
-    static Network create(boolean hasServices) {
+    static Network create(boolean hasServices, sh) {
         def networkId = UUID.randomUUID().toString()
 
         if (hasServices) {
             println("creating network: ${networkId}")
-            sh "docker network create --name ${networkId}"
+            shell "docker network create --name ${networkId}"
         }
 
-        return new Network(id: networkId, hasServices: hasServices)
+        return new Network(id: networkId, hasServices: hasServices, shell: sh)
     }
 
     def remove() {
         if (hasServices) {
             println("removing network: ${id}")
-            sh "docker network rm ${id}"
+            shell "docker network rm ${id}"
         }
     }
 
