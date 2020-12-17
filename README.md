@@ -16,27 +16,35 @@ image: golang:alpine
 
 variables:
   TEST_URL: http://example.com
+  POSTGRES_PASSWORD: t@st!p@ssw0rd
 
 services:
-  - postgres
-  - mysql
+  - postgres:latest
+  - nginx:latest
+  - redis:alpine
 
 steps:
+
   - name: build
     actions:
-      - echo "building step 1"
+      - echo "building step 1" && go version
       - echo "building step 2"
+
   - parallel:
+
       - name: unit test
         except:
           - master
         actions:
-          - echo "unit testing againest test url= $TEST_URL"
+          - echo "unit testing againest test url $TEST_URL and refereing to builtin var $NODE_NAME"
+
       - name: integration test
         only: [develop, release/*]
         actions:
-          - echo "integration testing step 1"
-          - echo "integration testing step 2"
+          - apk add curl && apk add redis
+          - echo "testing nginx" && curl nginx:80
+          - echo "testing redis" && echo INCR x | redis-cli -h redis
+
   - name: deploy
     trigger: manual
     only:
