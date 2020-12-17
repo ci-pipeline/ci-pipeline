@@ -6,23 +6,23 @@ def call(ObjectModel model) {
 class Network {
     String id
     boolean hasServices
-    def shell
+    def sh
 
     static Network create(boolean hasServices, sh) {
         def networkId = UUID.randomUUID().toString()
 
         if (hasServices) {
             println("creating network: ${networkId}")
-            shell "docker network create --name ${networkId}"
+            sh "docker network create --name ${networkId}"
         }
 
-        return new Network(id: networkId, hasServices: hasServices, shell: sh)
+        return new Network(id: networkId, hasServices: hasServices, sh: sh)
     }
 
     def remove() {
         if (hasServices) {
             println("removing network: ${id}")
-            shell "docker network rm ${id}"
+            sh "docker network rm ${id}"
         }
     }
 
