@@ -8,7 +8,8 @@ def call(ObjectModel model, def network) {
     def image2Container = [:]
 
     model.services.each { image ->
-        container = docker.image(image).run(env, network.getCliArgs())
+        container = docker.image(image)
+                .run(env, network.getCliArgs(), "--net-alias=${image.split(":")[0]}")
         image2Container[image] = container
     }
 
