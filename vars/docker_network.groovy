@@ -17,7 +17,7 @@ class Network {
 
         if (hasServices) {
             println("creating network: ${networkId}")
-            node.sh "docker network create --name ${networkId}"
+            node.sh "docker network create ${networkId}"
         }
 
         return new Network(id: networkId, hasServices: hasServices, node: node)
