@@ -3,14 +3,9 @@ import org.jenkinsci.plugins.pipeline.modeldefinition.when.utils.Comparator
 
 import static ObjectModel.Step
 
-def call(ObjectModel model, def image2Container) {
+def call(ObjectModel model, Network network) {
 
-    def link = ""
-    image2Container.each { image, container ->
-        link += " --link ${container.id}:${image.split(":")[0]}"
-    }
-
-    docker.image(model.image).inside(link) {
+    docker.image(model.image).inside(network.getCliArgs()) {
 
         model.steps.each { step ->
 
