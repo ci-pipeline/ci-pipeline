@@ -4,7 +4,7 @@ def call(ObjectModel model) {
         withEnv(model.variables) {
             wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
 
-                Network network = docker_network(model)
+                def network = docker_network(model)
                 def image2Container = null
 
                 try {

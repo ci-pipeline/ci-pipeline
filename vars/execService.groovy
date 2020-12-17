@@ -1,4 +1,4 @@
-def call(ObjectModel model, Network network) {
+def call(ObjectModel model, def network) {
 
     def env = ""
     model.variables.each {

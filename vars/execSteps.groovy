@@ -3,7 +3,7 @@ import org.jenkinsci.plugins.pipeline.modeldefinition.when.utils.Comparator
 
 import static ObjectModel.Step
 
-def call(ObjectModel model, Network network) {
+def call(ObjectModel model, def network) {
 
     docker.image(model.image).inside(network.getCliArgs()) {
 
