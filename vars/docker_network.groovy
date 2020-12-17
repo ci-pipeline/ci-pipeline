@@ -2,7 +2,7 @@ def call(ObjectModel model) {
     return Network.create(model.services.size() > 0)
 }
 
-class Network {
+public static class Network implements Serializable {
     String id
     boolean hasServices
 
