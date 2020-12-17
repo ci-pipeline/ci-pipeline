@@ -10,6 +10,7 @@ class Network {
 
     static Network create(boolean hasServices, def node) {
 
+        println("node")
         println(node)
         println(node.getClass())
 
