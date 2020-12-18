@@ -86,20 +86,20 @@ This is the section where you write your actual build scripts.
 Each step consist of the following:
 
 * #### name:
-Name of the step (required)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name of the step (required)
 
 * #### only:
-The branch list what the step will run on (optional). uses [ant glob pattern](http://ant.apache.org/manual/Types/fileset.html).
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The branch list what the step will run on (optional). uses [ant glob pattern](http://ant.apache.org/manual/Types/fileset.html).
 
 * #### except:
-The branch list what the step will not run on (optional). uses [ant glob pattern](http://ant.apache.org/manual/Types/fileset.html).
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The branch list what the step will not run on (optional). uses [ant glob pattern](http://ant.apache.org/manual/Types/fileset.html).
 
 * #### trigger:
-Whether to trigger the job `manual` or `automatic`, the default is `automatic`
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whether to trigger the job `manual` or `automatic`, the default is `automatic`
 
 * #### actions:
-Here is the actual scripts your write to do the build/test/deploy etc...
-for examle you can do `mvn clean package` or `go build` or `npm install` or whatever.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Here is the actual scripts your write to do the build/test/deploy etc...
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for examle you can do `mvn clean package` or `go build` or `npm install` or whatever.
 
 
 
