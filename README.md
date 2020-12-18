@@ -8,7 +8,7 @@ Run your jenkins pipeline with openiated `.ci-pipeline.yaml` (instead of the gen
 
 <img src="https://github.com/ci-pipeline/ci-pipeline/raw/master/etc/setup.png"  width="700px"/>
 
-As shown, (1) you will need to add your source url. and for (2) you will need to keep it unchanged (as it referes to the global configred Jenkinsfile that triggers the pipeline)
+As shown, (1) you will need to add your source url. and for (2) you will need to change the build configuration so the mode will be "by default Jenkinsfile", and tick the "sandbox" option. as shown above. 
 
 3. Place the file `.ci-pipeline.yaml` in the root dir of your project [see example here](https://github.com/ci-pipeline/example_multibranch) see next section on an example of the file.
 
