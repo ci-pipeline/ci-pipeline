@@ -81,7 +81,7 @@ You can pass variables to the image by using the `variables` section above. for 
 ### steps:
 This is the section where you write your actual build scripts.
 
->Note: The steps might run in parallel by nesting the steps inside `parallel` (see example above).
+>Note: The steps runs in parallel by nesting the steps inside `parallel` (see example above).
 
 Each step consist of the following:
 
