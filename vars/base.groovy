@@ -4,7 +4,7 @@ def call(ObjectModel model) {
         withEnv(model.variables) {
             wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
 
-                def network = docker_network(model)
+                def network = dockerNetwork(model)
                 def image2Container = null
 
                 try {
@@ -14,7 +14,7 @@ def call(ObjectModel model) {
                     image2Container?.each { image, container ->
                         println("cleaning for image=${image}, container=${container} ...")
                         container.stop()
-                        docker_rmi(image)
+                        dockerRmi(image)
                     }
                     network.remove()
                 }
