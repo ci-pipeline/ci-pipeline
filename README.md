@@ -98,8 +98,7 @@ Each step consist of the following:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whether to trigger the job `manual` or `automatic`, the default is `automatic`
 
 * #### actions:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Here is the actual scripts your write to do the build/test/deploy etc...
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for examle you can do `mvn clean package` or `go build` or `npm install` or whatever.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Here is the actual scripts your write to do the build/test/deploy etc. for examle you can do `mvn clean package` or `go build` or `npm install` or whatever.
 
 
 
