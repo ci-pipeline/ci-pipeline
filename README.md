@@ -84,22 +84,22 @@ This is the section where you write your actual build scripts.
 >Note: The steps might run in parallel by nesting the steps inside `parallel` (see example above).
 
 Each step consist of the following:
-#### name:
-name of the step (required)
 
-#### only:
-the branch list what the step will run on (optional). uses [ant glob pattern](http://ant.apache.org/manual/Types/fileset.html).
+* #### name:
+Name of the step (required)
 
-#### except:
-the branch list what the step will not run on (optional). uses [ant glob pattern](http://ant.apache.org/manual/Types/fileset.html).
+* #### only:
+The branch list what the step will run on (optional). uses [ant glob pattern](http://ant.apache.org/manual/Types/fileset.html).
 
-#### trigger:
-whether to trigger the job `manual` or `automatic`, the default is `automatic`
+* #### except:
+The branch list what the step will not run on (optional). uses [ant glob pattern](http://ant.apache.org/manual/Types/fileset.html).
 
-#### actions:
-here is the actual scripts your write to do the build/test/deploy etc...
+* #### trigger:
+Whether to trigger the job `manual` or `automatic`, the default is `automatic`
 
-for examle you can do "mvn clean package" or "go build" or "npm install" or whatever.
+* #### actions:
+Here is the actual scripts your write to do the build/test/deploy etc...
+for examle you can do `mvn clean package` or `go build` or `npm install` or whatever.
 
 
 
