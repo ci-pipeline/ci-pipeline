@@ -100,13 +100,5 @@ Each step consist of the following:
 * #### actions:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Here is the actual scripts your write to do the build/test/deploy etc. for examle you can do `mvn clean package` or `go build` or `npm install` or whatever.
 
-
-
-
-
-
-
-
-
-### Inspiration
+## Inspiration
 This project is inspired by [wolox-ci](https://github.com/Wolox/wolox-ci)
