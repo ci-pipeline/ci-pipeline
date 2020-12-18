@@ -1,5 +1,7 @@
 class ObjectModel {
 
+    private static final String DOCKER_SERVICE = "docker"
+
     // the container image the used to run the build
     public String image
     public List<Step> steps = new ArrayList<>()
@@ -29,6 +31,14 @@ class ObjectModel {
         boolean waitOnInput() {
             return "manual".equalsIgnoreCase(trigger)
         }
+    }
+
+    boolean hasDockerService() {
+        return services.contains(DOCKER_SERVICE)
+    }
+
+    static boolean isDockerService(String serviceName) {
+        return serviceName.equalsIgnoreCase(DOCKER_SERVICE)
     }
 
     static ObjectModel load(def yaml) {

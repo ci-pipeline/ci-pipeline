@@ -29,7 +29,7 @@ class Network {
 
     def getCliArgs() {
         if (hasServices) {
-            return "--net=${id}"
+            return " --net=${id} "
         }
         return ""
     }

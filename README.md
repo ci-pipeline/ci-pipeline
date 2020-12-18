@@ -22,6 +22,7 @@ services:
   - postgres:latest
   - nginx:latest
   - redis:alpine
+  - docker
 
 steps:
 
@@ -51,6 +52,7 @@ steps:
       - release/*
     actions:
       - echo "do deploy"
+      - docker version
 
 ```
 

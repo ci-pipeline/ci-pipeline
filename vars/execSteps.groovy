@@ -5,7 +5,12 @@ import static ObjectModel.Step
 
 def call(ObjectModel model, def network) {
 
-    docker.image(model.image).inside(network.getCliArgs()) {
+    def args = network.getCliArgs()
+    if (model.hasDockerService()) {
+        args += " -v /var/run/docker.sock:/var/run/docker.sock "
+    }
+
+    docker.image(model.image).inside(args) {
 
         model.steps.each { step ->
 
@@ -13,20 +18,20 @@ def call(ObjectModel model, def network) {
 
                 def stages = [:]
                 step.parallel.each { pStep ->
-                    stages[pStep.name] = { buildStep(pStep) }
+                    stages[pStep.name] = { buildStep(model, pStep) }
                 }
                 parallel(stages)
 
             } else {
                 stage(step.name) {
-                    buildStep(step)
+                    buildStep(model, step)
                 }
             }
         }
     }
 }
 
-private def buildStep(Step step) {
+private def buildStep(ObjectModel model, Step step) {
     if (step.except.size() > 0 && globContains(step.except, env.BRANCH_NAME)) {
         Utils.markStageSkippedForConditional(env.STAGE_NAME)
         return
@@ -42,6 +47,8 @@ private def buildStep(Step step) {
     }
 
     step.actions.each { action ->
+        model.hasDockerService() && dockerInstall()
+
         sh action
     }
 }

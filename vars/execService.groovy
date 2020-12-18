@@ -8,6 +8,9 @@ def call(ObjectModel model, def network) {
     def image2Container = [:]
 
     model.services.each { image ->
+        if (ObjectModel.isDockerService(image)) { // ignore docker here so to deal with it in execSteps
+            return
+        }
 
         args = "${env} ${network.getCliArgs()} --net-alias=${image.split(":")[0]}"
 
