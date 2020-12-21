@@ -43,7 +43,19 @@ private def buildStep(ObjectModel model, Step step) {
     }
 
     if (step.waitOnInput()) {
-        input()
+        try {
+            timeout(time: 5, unit: 'MINUTES') {
+                input()
+            }
+        } catch (err) {
+            def user = err.getCauses()[0].getUser()
+            if ('SYSTEM' == user.toString()) { // SYSTEM means timeout.
+                println("build timed out")
+            } else {
+                userInput = false
+                println("Aborted by: [${user}]")
+            }
+        }
     }
 
     step.actions.each { action ->
