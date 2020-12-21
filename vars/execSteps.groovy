@@ -55,6 +55,7 @@ private def buildStep(ObjectModel model, Step step) {
                 userInput = false
                 println("Aborted by: [${user}]")
             }
+            return
         }
     }
 
