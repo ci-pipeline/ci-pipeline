@@ -2,7 +2,7 @@
 Run your jenkins pipeline with openiated `.ci-pipeline.yaml` (instead of the generic `Jenkinsfile`).
 
 ## Setup:
-1. Run [a preconfigured jenkins instance](https://github.com/ci-pipeline/jenkins) using docker-compose.
+1. Run [a preconfigured jenkins instance](https://github.com/ci-pipeline/jenkins).
 
 2. You will need to add a "multibranch pipeline" job for your project, as follows:
 
