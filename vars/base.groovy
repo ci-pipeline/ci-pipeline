@@ -1,6 +1,6 @@
 def call(ObjectModel model) {
 
-    timeout(time: 10, unit: 'MINUTES') {
+    timeout(time: model.timeout, unit: 'MINUTES') {
         withEnv(model.variables) {
             wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
 

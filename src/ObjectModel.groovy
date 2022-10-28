@@ -4,6 +4,9 @@ class ObjectModel {
 
     // the container image the used to run the build
     public String image
+    // in minutes
+    public Integer timeout = 10
+
     public List<Step> steps = new ArrayList<>()
     // variables set as env vars
     public List<String> variables = new ArrayList<>()
