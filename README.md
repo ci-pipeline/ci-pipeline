@@ -57,6 +57,9 @@ steps:
 The image that will be used to run your build process. 
 you can choose whatever image you want, it need to have the compiler toolchain commands preinstall so to run the build scripts you the `steps` section below.
 
+### timeout:
+The timeout in minutes for each pipeline, default is 10 .
+
 ### variables:
 Variables to be injected in build environment as well as being passed to any running service (see `services` section below)
 
