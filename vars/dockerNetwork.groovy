@@ -1,6 +1,9 @@
 def call(ObjectModel model) {
 
-    return Network.create(model.services.size() > 0, this)
+    def hasOnlyDockerService = model.services.size() == 1 && ObjectModel.isDockerService(model.services[0])
+    def hasServices = !hasOnlyDockerService && model.services.size() > 0
+
+    return Network.create(hasServices, this)
 }
 
 class Network {
