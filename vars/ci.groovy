@@ -5,7 +5,7 @@ def call(String yamlName) {
     try {
         yaml = readYaml file: yamlName
     } catch (error) {
-        println("cannot load .ci-pipeline.yaml make sure it is at the root of your source code; "+ error)
+        println("Cannot load .ci-pipeline.yaml make sure it is at the root of your source code: "+ error.getMessage())
         currentBuild.result = 'ABORTED'
         return
     }
